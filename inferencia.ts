@@ -87,38 +87,130 @@
 
 // const thor = createHero({name: 'Thor', age: 1500})
 
-//Optional properties
-type HeroId = `${string}-${string}-${string}-${string}-${string}`
-type Hero = {
-    readonly id?: HeroId
-    name: string
-    age:number
-    isActive?: boolean
-}
+// Optional properties
+// type HeroId = `${string}-${string}-${string}-${string}-${string}`
+// type HeroPowerScale = 'local' | 'planetary' | 'galactic' | 'universal' | 'multiversal'
 
-let hero: Hero = {
-    name: 'thor',
-    age: 1500
-}
+// type HeroBasicInfo = {
+//     name: string
+//     age:number
+// }
+// type HeroProperties = {
+//     readonly id?: HeroId
+//     isActive?: boolean
+//     powerScale?: HeroPowerScale
+// }
 
-function createHero(hero: Hero): Hero {
-    const {name, age} = hero
-    return {
-        id: crypto.randomUUID(), 
-        name, 
-        age, isActive: true}
-}
+// // const enableAnimationDuration: boolean | number = 200
 
-const thor = createHero({name: 'Thor', age: 1500})
-// console.log(thor.isActive) //--> true
+// type Hero = HeroBasicInfo & HeroProperties
 
-thor.id?.toString()//cosulta en una línea
+// let hero: Hero = {
+//     name: 'thor',
+//     age: 1500
+// }
 
-// thor.id = 423542654745634123
+// function createHero(input: HeroBasicInfo): Hero {
+//     const {name, age} = input
+//     return {
+//         id: crypto.randomUUID(), 
+//         name, 
+//         age, isActive: true}
+// }
 
-// template union types
+// const thor = createHero({name: 'Thor', age: 1500})
+// thor.powerScale = 'multiversal'
+// // console.log(thor.isActive) //--> true
 
-type HexadecimalColor = `#${string}`
+// thor.id?.toString()//cosulta en una línea
 
-const color: HexadecimalColor = '003FFF'
-const color2: HexadecimalColor = '#0033FF'
+// // thor.id = 423542654745634123
+
+// // template union types
+
+// type HexadecimalColor = `#${string}`
+
+// // const color: HexadecimalColor = '003FFF'
+// const color2: HexadecimalColor = '#0033FF'
+
+//TypeIndexing
+// type HeroProperties = {
+//     isActive: boolean
+//     address: {
+//         planet: string
+//         city: string
+//     }
+// }
+
+// const addressHero: HeroProperties['address'] = {
+//     city: 'Madrid',
+//     planet: 'Earth'
+// }
+
+// const address = {
+//     planet: 'Earth',
+//     city: 'Madrid'
+// }
+
+// type Address = typeof address
+
+// const addressTwitch: Address = {
+//     planet: 'Mars',
+//     city: 'Barcelona'
+// }
+
+//Type from function return
+// function createAddress() {
+//     return {
+//         planet: 'Tierra',
+//         city: 'Barcelona'
+//     }
+// }
+
+// type Address = ReturnType<typeof createAddress>
+
+
+//Arrays
+
+// const languages: (string | number)[] = []
+
+// languages.push('JavaScript')
+// languages.push('JavaScript')
+// languages.push(2)
+// languages.push(true)
+
+// type HeroId = `${string}-${string}-${string}-${string}-${string}`
+// type HeroPowerScale = 'local' | 'planetary' | 'galactic' | 'universal' | 'multiversal'
+
+// type HeroBasicInfo = {
+//     id?:number,
+//     name: string,
+//     age:number,
+// }
+
+// const herosWithBasicInfo: HeroBasicInfo[] = []
+
+/*
+[
+['X', 'O','X'], // <- string[]
+['X', 'O','X'], // <- string[]
+['X', 'O','X'] // <- string[]
+]
+*/
+
+type CellValue = 'X' | 'O' | ''
+type GameBoard = [
+    [CellValue, CellValue, CellValue],
+    [CellValue, CellValue, CellValue],
+    [CellValue, CellValue, CellValue]
+]
+
+
+const gameBoard: GameBoard = [
+    ['X', 'O','X'], // <- string[]
+    ['O', 'X','O'], // <- string[]
+    ['X', 'O','X'] // <- string[]
+]
+
+type State = [string, (newName: string) => void]
+const [hero, setHero] = useState('thor')
